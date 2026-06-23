@@ -1,6 +1,6 @@
 # 📝 BlogSpace – Full Stack Blogging Platform
 
-🔗 Live Demo: https://blogplatformmm.netlify.app
+🔗 Live Demo: (https://blogplatformm.netlify.app/)
 
 ## About the Project
 
