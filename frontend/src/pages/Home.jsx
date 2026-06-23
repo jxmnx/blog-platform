@@ -1,32 +1,66 @@
 import { useEffect, useState } from "react";
-import { getPosts } from "../services/postService";
-
+import {
+  getPosts,
+  deletePost,
+} from "../services/postService";
+import { Link } from "react-router-dom";
 function Home() {
+    const handleDelete = async (id) => {
+  try {
+    await deletePost(id);
+
+    setPosts(
+      posts.filter((post) => post._id !== id)
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      try {
-        const data = await getPosts();
-        setPosts(data);
-      } catch (error) {
-        console.error(error);
-      }
+      const data = await getPosts();
+      setPosts(data);
     };
 
     fetchPosts();
   }, []);
 
   return (
-    <div className="container mt-5">
-      <h2>Blog Platform</h2>
+    <div className="page-container">
+      <h1 className="blog-title">
+  Welcome to BlogSpace
+</h1>
+
+<p className="text-center mb-5">
+  Share your stories and ideas.
+</p>
 
       {posts.map((post) => (
-        <div key={post._id} className="card p-3 mb-3">
-          <h4>{post.title}</h4>
-          <p>{post.content}</p>
-        </div>
-      ))}
+ <div key={post._id} className="card-custom">
+  <h3>{post.title}</h3>
+  <p>
+  {post.content.substring(0, 150)}...
+</p>
+
+  <div className="d-flex justify-content-between mt-3">
+    <Link
+  to={`/post/${post._id}`}
+  className="read-more"
+>
+  Read More →
+</Link>
+
+    <button
+      className="btn btn-danger btn-sm"
+      onClick={() => handleDelete(post._id)}
+    >
+      Delete
+    </button>
+  </div>
+</div>
+))}
     </div>
   );
 }

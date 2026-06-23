@@ -34,14 +34,16 @@ function Login() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Login</h2>
+    <div className="auth-card">
+      <h2 className="text-center mb-4">
+        Welcome Back 👋
+      </h2>
 
       <form onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Email Address"
           className="form-control mb-3"
           onChange={handleChange}
         />
@@ -50,11 +52,14 @@ function Login() {
           type="password"
           name="password"
           placeholder="Password"
-          className="form-control mb-3"
+          className="form-control mb-4"
           onChange={handleChange}
         />
 
-        <button className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn-pink w-100"
+        >
           Login
         </button>
       </form>

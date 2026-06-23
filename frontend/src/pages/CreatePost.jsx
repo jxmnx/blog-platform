@@ -32,33 +32,38 @@ function CreatePost() {
     }
   };
 
-  return (
-    <div className="container mt-5">
-      <h2>Create Blog Post</h2>
+ return (
+  <div className="auth-card">
+    <h2 className="text-center mb-4">
+      Write a New Story ✍️
+    </h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Blog Title"
-          className="form-control mb-3"
-          onChange={handleChange}
-        />
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="title"
+        placeholder="Blog Title"
+        className="form-control mb-3"
+        onChange={handleChange}
+      />
 
-        <textarea
-          name="content"
-          placeholder="Write your blog..."
-          rows="5"
-          className="form-control mb-3"
-          onChange={handleChange}
-        />
+      <textarea
+        name="content"
+        placeholder="Share your thoughts..."
+        rows="6"
+        className="form-control mb-4"
+        onChange={handleChange}
+      />
 
-        <button className="btn btn-success">
-          Create Post
-        </button>
-      </form>
-    </div>
-  );
+      <button
+        type="submit"
+        className="btn-pink w-100"
+      >
+        Publish Post
+      </button>
+    </form>
+  </div>
+);
 }
 
 export default CreatePost;

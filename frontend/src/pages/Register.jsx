@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { registerUser } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -19,18 +22,21 @@ function Register() {
     e.preventDefault();
 
     try {
-      const data = await registerUser(formData);
+      await registerUser(formData);
+
       alert("Registration Successful!");
-      console.log(data);
+
+      navigate("/login");
     } catch (error) {
-      console.error(error);
       alert("Registration Failed");
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Register</h2>
+    <div className="auth-card">
+      <h2 className="text-center mb-4">
+        Create Account ✨
+      </h2>
 
       <form onSubmit={handleSubmit}>
         <input
@@ -44,7 +50,7 @@ function Register() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Email Address"
           className="form-control mb-3"
           onChange={handleChange}
         />
@@ -53,11 +59,14 @@ function Register() {
           type="password"
           name="password"
           placeholder="Password"
-          className="form-control mb-3"
+          className="form-control mb-4"
           onChange={handleChange}
         />
 
-        <button className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn-pink w-100"
+        >
           Register
         </button>
       </form>
