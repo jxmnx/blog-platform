@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,6 +25,11 @@ function Login() {
       const data = await loginUser(formData);
 
       localStorage.setItem("token", data.token);
+
+localStorage.setItem(
+  "user",
+  JSON.stringify(data.user)
+);
 
       alert("Login Successful");
 
@@ -48,13 +54,25 @@ function Login() {
           onChange={handleChange}
         />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="form-control mb-4"
-          onChange={handleChange}
-        />
+       <div className="input-group mb-4">
+  <input
+    type={showPassword ? "text" : "password"}
+    name="password"
+    placeholder="Password"
+    className="form-control"
+    onChange={handleChange}
+  />
+
+  <button
+    type="button"
+    className="btn btn-outline-secondary"
+    onClick={() =>
+      setShowPassword(!showPassword)
+    }
+  >
+    {showPassword ? "🙈" : "👁"}
+  </button>
+</div>
 
         <button
           type="submit"

@@ -7,6 +7,7 @@ import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import Navbar from "./components/Navbar";
 import EditPost from "./pages/EditPost";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/create" element={<CreatePost />} />
         <Route path="/post/:id" element={<PostDetails />} />
+        <Route path="/profile" element={<Profile />} />
         <Route
   path="/edit/:id"
   element={<EditPost />}

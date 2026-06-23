@@ -44,21 +44,14 @@ function Home() {
   {post.content.substring(0, 150)}...
 </p>
 
-  <div className="d-flex justify-content-between mt-3">
-    <Link
-  to={`/post/${post._id}`}
-  className="read-more"
->
-  Read More →
-</Link>
-
-    <button
-      className="btn btn-danger btn-sm"
-      onClick={() => handleDelete(post._id)}
-    >
-      Delete
-    </button>
-  </div>
+<div className="mt-3">
+  <Link
+    to={`/post/${post._id}`}
+    className="read-more"
+  >
+    Read More →
+  </Link>
+</div>
 </div>
 ))}
     </div>

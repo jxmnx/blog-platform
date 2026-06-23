@@ -1,6 +1,13 @@
-import { Link, useParams } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  useNavigate,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPosts } from "../services/postService";
+import {
+  getPosts,
+  deletePost,
+} from "../services/postService";
 import {
   getComments,
   addComment,
@@ -8,6 +15,7 @@ import {
 
 function PostDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
@@ -56,6 +64,25 @@ function PostDetails() {
     }
   };
 
+  const handleDelete = async () => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this post?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await deletePost(post._id);
+
+    alert("Post deleted successfully");
+
+    navigate("/");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete post");
+  }
+};
+
   if (!post) {
     return (
       <div className="page-container">
@@ -67,12 +94,21 @@ function PostDetails() {
   return (
     <div className="page-container">
       <div className="card-custom">
-        <Link
-          to={`/edit/${post._id}`}
-          className="btn btn-warning mb-3"
-        >
-          ✏️ Edit Post
-        </Link>
+        <div className="d-flex gap-2 mb-4">
+  <Link
+    to={`/edit/${post._id}`}
+    className="btn btn-warning"
+  >
+    ✏️ Edit Post
+  </Link>
+
+  <button
+    className="btn btn-danger"
+    onClick={handleDelete}
+  >
+    🗑 Delete Post
+  </button>
+</div>
 
         <h1>{post.title}</h1>
 
