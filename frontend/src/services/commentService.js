@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5050/api/comments";
+const API_URL =
+  "https://blog-platform-mlm3.onrender.com/api/comments";
 
 export const getComments = async (postId) => {
   const response = await axios.get(
